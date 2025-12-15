@@ -286,12 +286,29 @@ async function startSelectionPhase() {
     // Need enough to cover screen. 150 items usually safe for 1080p.
     mosaicGrid.innerHTML = '';
     const items = [];
+    const recentImages = []; // Queue to prevent adjacency
+    const COOLDOWN = 15; // Avoid repeating image within this many steps (approx 1 row)
+
     for (let i = 0; i < 150; i++) {
         // const id = (i % TOTAL_IMAGES) + 1; // Removed
         const div = document.createElement('div');
         div.className = 'mosaic-item'; // CSS handles size
+
+        // Smart Selection Logic
+        let selectedInfo;
+        let attempts = 0;
+        do {
+            selectedInfo = getRandomImage();
+            attempts++;
+        } while (recentImages.includes(selectedInfo) && attempts < 10);
+
+        recentImages.push(selectedInfo);
+        if (recentImages.length > COOLDOWN) {
+            recentImages.shift();
+        }
+
         const img = document.createElement('img');
-        img.src = `${ASSET_PATH}${getRandomImage()}`;
+        img.src = `${ASSET_PATH}${selectedInfo}`; // selectedInfo is filename string
         img.className = 'mosaic-item';
         div.appendChild(img);
         mosaicGrid.appendChild(div);
