@@ -7,7 +7,7 @@ const AVAILABLE_IMAGES = [
     'Akhand_Rahul.png',
     'Anish_Shah.jpeg',
     'BP_Singh.jpeg',
-    'Brijesh_BP.png',
+    'Brijesh_BP.jpeg',
     'Brijesh_Datta.jpg',
     'Deepak_Kamale.jpeg',
     'Gaurav_Aggarwal.png',
