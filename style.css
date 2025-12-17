@@ -184,6 +184,31 @@ body {
     transition: 0.3s;
     text-transform: uppercase;
     letter-spacing: 2px;
+    position: relative;
+    z-index: 200;
+    /* Ensure clickable above other layers */
+    min-width: 300px;
+    /* Base width */
+    transition: all 0.3s ease;
+}
+
+.cosmic-btn.btn-reveal {
+    min-width: 500px;
+    /* Longer for Reveal action */
+    border-color: var(--neon-pink);
+    color: var(--neon-pink);
+    background: rgba(255, 0, 85, 0.1);
+}
+
+.cosmic-btn.btn-reveal:hover {
+    background: var(--neon-pink);
+    color: #fff;
+    box-shadow: 0 0 25px var(--neon-pink);
+}
+
+/* Force hide unwanted labels in center card */
+.reveal-card.center-card>*:not(img):not(.portal-halo) {
+    display: none !important;
 }
 
 .cosmic-btn:hover {
@@ -922,4 +947,193 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+}
+
+/* --- LOADER SCREEN --- */
+#loader-screen {
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at center, #0a0a0a 0%, #000 100%);
+    z-index: 95;
+    flex-direction: column;
+    gap: 2rem;
+    /* Space between text and box */
+}
+
+.loader-placeholder {
+    /* Match Dimensions of .energy-sphere where possible */
+    height: 75vh;
+    max-height: 850px;
+    width: auto;
+    aspect-ratio: 3/4;
+    /* Standard portrait approximation */
+
+    background: #111;
+    border-radius: 20px;
+    border: 2px solid rgba(66, 133, 244, 0.3);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+
+    /* Blinking / Pulsing Effect for the box itself */
+    animation: boxPulse 2s ease-in-out infinite;
+}
+
+.placeholder-glow {
+    position: absolute;
+    inset: 0;
+
+    /* Subtle internal scan or sweep */
+    background: linear-gradient(180deg, transparent, rgba(66, 133, 244, 0.1), transparent);
+    background-size: 100% 200%;
+    animation: scanVertical 3s linear infinite;
+}
+
+.loader-text {
+    font-family: var(--font-head);
+    font-size: 2rem;
+    color: #fff;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin-bottom: 2rem;
+
+    /* Fixed height to prevent hopping */
+    height: 80px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+
+    /* Fade transition */
+    opacity: 1;
+    transition: opacity 0.2s ease-in-out;
+
+    /* Optional: Keep the gradient text or make it simple white/glow */
+    text-shadow: 0 0 20px rgba(66, 133, 244, 0.8);
+}
+
+.loader-text.hidden {
+    opacity: 0;
+}
+
+@keyframes boxPulse {
+
+    0%,
+    100% {
+        opacity: 0.6;
+        box-shadow: 0 0 20px rgba(66, 133, 244, 0.2);
+        border-color: rgba(66, 133, 244, 0.3);
+    }
+
+    50% {
+        opacity: 1;
+        box-shadow: 0 0 50px rgba(66, 133, 244, 0.6);
+        border-color: rgba(66, 133, 244, 0.8);
+    }
+}
+
+@keyframes scanVertical {
+    0% {
+        background-position: 50% -100%;
+    }
+
+    100% {
+        background-position: 50% 200%;
+    }
+}
+
+/* --- NEW ADDITIONS FOR REVEAL FLOW --- */
+.blurred {
+    filter: blur(8px) brightness(0.6);
+    transition: filter 1.5s ease;
+}
+
+.revealed-img {
+    filter: blur(0) brightness(1);
+}
+
+.invisible-initially {
+    opacity: 0 !important;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+/* Hide name-plate when the PREVIOUS sibling image is blurred */
+.identity-img.blurred+.name-plate {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(10px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.name-plate {
+    /* Ensure it has a transition for when it reappears */
+    transition: opacity 0.5s ease 0.5s, transform 0.5s ease 0.5s;
+    /* Delayed appearance */
+    transform: translateY(0);
+    opacity: 1;
+    text-align: center;
+    line-height: 1.4;
+
+    /* Re-enforce Box Sytles */
+    background: rgba(0, 0, 0, 0.8);
+    padding: 10px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    /* glass-border var manually */
+    margin-top: 1rem;
+    min-width: 200px;
+}
+
+.role-text {
+    font-size: 0.7em;
+    /* Slightly larger */
+    color: var(--neon-cyan);
+    letter-spacing: 2px;
+    display: block;
+    margin-top: 5px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.clue-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 80px;
+    /* Space for text */
+    margin: 1rem 0;
+    z-index: 100;
+    /* Ensure clickable */
+    position: relative;
+}
+
+.clue-btn {
+    font-family: var(--font-head);
+    font-size: 1.2rem;
+    padding: 0.5rem 2rem;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--neon-cyan);
+    color: var(--neon-cyan);
+    cursor: pointer;
+    transition: all 0.3s;
+    letter-spacing: 2px;
+    pointer-events: auto;
+    /* Ensure clickable */
+}
+
+.clue-btn:hover {
+    background: var(--neon-cyan);
+    color: #000;
+    box-shadow: 0 0 15px var(--neon-cyan);
+}
+
+.clue-text {
+    font-family: var(--font-head);
+    font-size: 2rem;
+    color: var(--neon-purple);
+    letter-spacing: 4px;
+    animation: textWarp 2s infinite;
+    text-shadow: 0 0 10px var(--neon-pink);
 }

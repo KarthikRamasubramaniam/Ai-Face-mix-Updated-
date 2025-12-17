@@ -46,45 +46,17 @@
         </div>
     </section>
 
-    <!-- PHASE 3: MERGE SCREEN (Sphere Display) -->
-    <section id="merge-screen" class="screen hidden">
-        <div id="clue-overlay" class="clue-container">
-            <h3 class="clue-label">CLUE</h3>
-            <h1 id="clue-text" class="clue-text"></h1>
-        </div>
+    <!-- PHASE 3: MERGE SCREEN (REMOVED) -->
 
-        <div class="sphere-container" id="sphere-wrapper">
-            <div class="energy-sphere">
-                <canvas id="merge-canvas" width="400" height="400"></canvas>
-                <div class="sphere-glint"></div>
-                <div class="sphere-rings"></div>
-            </div>
 
-            <!-- Hidden container for the split animation assets -->
-            <div id="split-container" class="split-wrapper hidden">
-                <div class="split-half left" id="split-left"></div>
-                <div class="split-half right" id="split-right"></div>
-                <div class="crack-overlay"></div>
-            </div>
-        </div>
-
-        <div class="button-container" id="merge-controls">
-            <button id="split-btn" class="pulse-btn">
-                <span class="btn-glow"></span>
-                REVEAL THE IDENTITIES
-            </button>
-        </div>
-    </section>
-
-    <!-- PHASE 4: REVEAL SCREEN -->
+    <!-- PHASE 3: REVEAL SCREEN (Consolidated) -->
     <section id="reveal-screen" class="screen hidden">
         <div class="reveal-content">
             <!-- Left: Origin A -->
             <div class="reveal-card side-card">
                 <div class="portal-halo"></div>
-                <img id="reveal-img-a" src="assets/img001.jpeg" alt="Origin A">
+                <img id="reveal-img-a" class="identity-img blurred" src="assets/img001.jpeg" alt="Origin A">
                 <div class="name-plate">
-                    <span id="reveal-origin-a" class="origin-label">UNIVERSE A-113</span>
                     <span id="reveal-name-a" class="hero-name">UNKNOWN</span>
                 </div>
             </div>
@@ -93,24 +65,27 @@
             <div class="reveal-card center-card">
                 <div class="portal-halo highlight-halo"></div>
                 <img id="reveal-img-merged" src="assets/preview-merged.jpeg" alt="Merged Reality">
-                <div class="name-plate">
-                    <span class="origin-label">NEW REALITY</span>
-                    <span class="hero-name">FUSION COMPLETE</span>
-                </div>
+                <!-- Removed Text Labels per request -->
             </div>
 
             <!-- Right: Origin B -->
             <div class="reveal-card side-card">
                 <div class="portal-halo"></div>
-                <img id="reveal-img-b" src="assets/img002.jpg" alt="Origin B">
+                <img id="reveal-img-b" class="identity-img blurred" src="assets/img002.jpg" alt="Origin B">
                 <div class="name-plate">
-                    <span id="reveal-origin-b" class="origin-label">UNIVERSE B-616</span>
                     <span id="reveal-name-b" class="hero-name">UNKNOWN</span>
                 </div>
             </div>
         </div>
 
-        <button id="reset-btn" class="cosmic-btn small">FUSE ANOTHER REALITY</button>
+        <!-- Clue Section -->
+        <button id="main-action-btn" class="cosmic-btn small">REVEAL IDENTITIES</button>
+
+        <!-- Clue Section -->
+        <div class="clue-section">
+            <button id="show-clue-btn" class="clue-btn">SHOW CLUE</button>
+            <div id="clue-display" class="clue-text hidden"></div>
+        </div>
     </section>
 
     <!-- Global Effects -->
